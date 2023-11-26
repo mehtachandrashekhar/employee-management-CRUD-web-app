@@ -8,5 +8,10 @@
   "author": "Chandrashekhar Mehta",
   "license": "ISC",
   "keywords": [],
-  "description": "An employee management CRUD web-app"
+  "description": "An employee management CRUD web-app",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.1"
+  }
 }
