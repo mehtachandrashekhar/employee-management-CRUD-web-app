@@ -25,3 +25,5 @@ router.post('/post', async (req, res) => {
         return res.status(500).json({ message: 'Intrenal Server error' })
     }
 });
+
+module.exports = router
