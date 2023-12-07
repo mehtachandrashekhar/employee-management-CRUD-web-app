@@ -5,7 +5,6 @@ const connectDb = require('./config/db');
 const routes =  require('./routes/user');
 const app = express();
 
-// const port = process.env.PORT || 4545; // older port 
 
 connectDb();
 const port = process.env.NODE_LOCAL_PORT || 3020;
