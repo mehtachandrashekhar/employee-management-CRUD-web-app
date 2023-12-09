@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('Hello World! crud management app is coming !');
+  res.send('Hello World! `');
 });
 
 app.use('/', routes);
