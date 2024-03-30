@@ -3,13 +3,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// Sample data for initial employees
-let employees = [
-  { id: 1, name: 'John Doe', position: 'Software Engineer' },
-  { id: 2, name: 'Jane Smith', position: 'Product Manager' }
-];
-
+``
 // Middleware to parse JSON request body
 app.use(bodyParser.json());
 
