@@ -1,26 +1,12 @@
 const mongoose = require('mongoose');
-const mongoURI = "mongodb://localhost:27017"
+require('dotenv').config();
 
-const connectDb = async () => {
-    try {
-        mongoose.set('strictQuery', false)
-        mongoose.connect(mongoURI) 
-        console.log('Mongo connected')
-    }
-    catch(error) {
-        console.log(error)
-        process.exit()
-    }
-}
-module.exports = connectDb;
-// const mongoose = require('mongoose')
+const MONGODB_URI = process.env.MONGODB_URI;
 
-// const url = 'mongodb://localhost:21017/docker-node-mongo';
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// const connectDb = () => {
-//     mongoose.connect(url, () => {
-//         console.log('connect to MongoDB');
-//     })
-// }
-
-// module.exports = connectDb;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to the database');
+});
