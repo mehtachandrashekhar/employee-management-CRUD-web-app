@@ -1,20 +1,17 @@
-const monsgoose = require('mongoose');
-const { Schema } = mongoose;
+const mongoose = require('mongoose');
 
-const userSchema = new Schema(
-    {
-        name:{
-            type: String,
-            required:true,
-        },
-        password: {
-            type:String,
-            required:true,
-        },
-    },
-    {
-        timestamps: true,
-    }
-);
+const employeeSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  position: {
+    type: String,
+    required: true
+  },
+  // Add more fields as needed
+});
 
-module.exports = monsgoose.model('User',userSchema);
+const Employee = mongoose.model('Employee', employeeSchema);
+
+module.exports = Employee;
