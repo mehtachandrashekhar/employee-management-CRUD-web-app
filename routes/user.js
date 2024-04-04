@@ -28,4 +28,16 @@ router.get('/employees/:id', async (req, res) => {
   }
 });
 
+router.post('/employees', async (req, res) => {
+  try {
+    const { name, position } = req.body;
+    const employee = new Employee({ name, position });
+    await employee.save();
+    res.status(201).json(employee);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
