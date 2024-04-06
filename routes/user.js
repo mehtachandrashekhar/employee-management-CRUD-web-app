@@ -54,4 +54,18 @@ router.put('/employees/:id', async (req, res) => {
   }
 });
 
+router.put('/employees/:id', async (req, res) => {
+  try {
+    const { name, position } = req.body;
+    const employee = await Employee.findByIdAndUpdate(req.params.id, { name, position }, { new: true });
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+    res.json(employee);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
