@@ -1,13 +1,13 @@
-FROM node
+FROM node:latest
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json .
+COPY package*.json ./
 
 RUN npm install
 
-COPY . ./
+COPY . .
+# Expose port
+EXPOSE 3000
 
-EXPOSE 8082
-
-CMD [ "npm","start" ]
+CMD ["node", "app.js"]
