@@ -1,84 +1,35 @@
 const express = require('express');
-const { validationResult } = require('express-validator');
-const Employee = require('../models/Employee');
-
 const router = express.Router();
+const User = require('../models/user');
 
-// Get all employees
-router.get('/employees', async (req, res) => {
+router.post('/post', async (req, res) => {
   try {
-    const employees = await Employee.find();
-    res.json(employees);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-router.get('/employees/:id', async (req, res) => {
-  try {
-    const employee = await Employee.findById(req.params.id);
-    if (!employee) {
-      return res.status(404).json({ message: 'Employee not found' });
+    const { name, password } = req.body;
+    if (name === 'admin' && password === 'admin') {
+      return res.status(200).json('Welcome to the admin page');
     }
-    res.json(employee);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
 
-router.post('/employees', async (req, res) => {
-  try {
-    const { name, position } = req.body;
-    const employee = new Employee({ name, position });
-    await employee.save();
-    res.status(201).json(employee);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-router.put('/employees/:id', async (req, res) => {
-  try {
-    const { name, position } = req.body;
-    const employee = await Employee.findByIdAndUpdate(req.params.id, { name, position }, { new: true });
-    if (!employee) {
-      return res.status(404).json({ message: 'Employee not found' });
+    if (!(name && password)) {
+      return res.status(200).json('Please enter a name and password');
     }
-    res.json(employee);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
 
-router.put('/employees/:id', async (req, res) => {
-  try {
-    const { name, position } = req.body;
-    const employee = await Employee.findByIdAndUpdate(req.params.id, { name, position }, { new: true });
-    if (!employee) {
-      return res.status(404).json({ message: 'Employee not found' });
+    const checkUser = await User.findOne({name, password});
+    if(checkUser){
+      return res.status(409).json({
+        message:'User already exists',
+      });
     }
-    res.json(employee);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+    const user = new User({name, password});
+    await user.save();
 
-router.delete('/employees/:id', async (req, res) => {
-  try {
-    const employee = await Employee.findByIdAndDelete(req.params.id);
-    if (!employee) {
-      return res.status(404).json({ message: 'Employee not found' });
-    }
-    res.sendStatus(204);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    return res.status(201).json({
+      message:'User created Successfully',
+      user,
+    });
+  } catch(error){
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
   }
-});
-
-module.exports = router;
+})
