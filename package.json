@@ -3,16 +3,24 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start":"node app.js"
+    "start": "node app.js"
   },
   "author": "Chandrashekhar Mehta",
   "license": "ISC",
   "keywords": [],
   "description": "An employee management CRUD web-app",
   "dependencies": {
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "mongodb": "6.3",
-    "mongoose": "^8.0.1"
-  }
+    "mongoose": "^8.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mehtachandrashekhar/employee-management-CRUD-web-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mehtachandrashekhar/employee-management-CRUD-web-app/issues"
+  },
+  "homepage": "https://github.com/mehtachandrashekhar/employee-management-CRUD-web-app#readme"
 }
