@@ -32,4 +32,7 @@ router.post('/post', async (req, res) => {
       message: 'Internal server error',
     });
   }
-})
+});
+
+module.exports = router;
+
