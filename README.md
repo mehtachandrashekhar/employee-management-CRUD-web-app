@@ -1,3 +1,4 @@
-# employee-management-CRUD-web-app
+# employee-management-web-app
+
 ## MERN Stack Used (MongoDB, Express.js, React.js, Node.js)
-<p>This is an CRUD application under the MERN stack for employee management. </p>
+<p>This project is created under coursera projects network</p>
