@@ -12,6 +12,7 @@ const App = () => {
     fetchEmployees();
   }, []);
 
+  // Function to fetch employees from the backend
   const fetchEmployees = async () => {
     const data = await getEmployees();
     setEmployees(data);
@@ -30,8 +31,8 @@ const App = () => {
     <div>
       <h1>Employee Management</h1>
       <DepartmentFilter onFilter={handleFilter} />
-      <EmployeeForm refreshEmployees={fetchEmployees} />
-      <EmployeeList employees={filteredEmployees} />
+      <EmployeeForm refreshEmployees={fetchEmployees} />  {/* Pass refreshEmployees here too */}
+      <EmployeeList employees={filteredEmployees} refreshEmployees={fetchEmployees} />  {/* Pass refreshEmployees */}
     </div>
   );
 };
