@@ -9,7 +9,7 @@ const EmployeeForm = ({ refreshEmployees }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await createEmployee({ name, surname, department });
-    refreshEmployees();
+    refreshEmployees();  // Refresh the list after adding an employee
     setName('');
     setSurname('');
     setDepartment('');
