@@ -1,16 +1,32 @@
 version: '3'
+
 services:
-  web:
-    build: .
+  # Backend (Node.js + Express)
+  backend:
+    build: ./backend
     ports:
-      - "8082:8082"
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mern-app
     depends_on:
       - mongo
+
+  # Frontend (React.js)
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+
+  # MongoDB (Database)
   mongo:
     image: mongo
     ports:
       - "27017:27017"
-
-    # environment:
-    #   - PORT=3000
-    #   - MONGODB_URI=mongodb://mongo:27017/your-database-name
+    volumes:
+      - ./mongo-data:/data/db
